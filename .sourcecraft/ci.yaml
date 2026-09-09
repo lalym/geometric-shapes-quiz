@@ -1,0 +1,21 @@
+on:
+  push:
+    - workflows: [check-site]
+      filter:
+        branches: ["main"]
+
+workflows:
+  check-site:
+    tasks:
+      - name: check-site-integrity
+        image: docker.io/library/alpine
+        cubes:
+          - name: check-index
+            script:
+              - test -f index.html && echo "index.html present"
+              - test -f README.md && echo "README.md present"
+
+          - name: check-shapes
+            script:
+              - test -d shapes && echo "shapes/ directory present"
+              - test "$(ls shapes/*.png | wc -l)" -eq 18 && echo "All 18 shape images present"
