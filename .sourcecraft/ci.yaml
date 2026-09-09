@@ -18,4 +18,4 @@ workflows:
           - name: check-shapes
             script:
               - test -d shapes && echo "shapes/ directory present"
-              - test "$(ls shapes/*.png | wc -l)" -eq 18 && echo "All 18 shape images present"
+              - test "$(ls shapes/*.jpg | wc -l)" -eq 18 && echo "All 18 shape images present"
